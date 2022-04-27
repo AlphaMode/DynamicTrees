@@ -3,12 +3,14 @@ package com.ferreusveritas.dynamictrees.entities.render;
 import com.ferreusveritas.dynamictrees.entities.FallingTreeEntity;
 import com.ferreusveritas.dynamictrees.models.FallingTreeEntityModel;
 import com.ferreusveritas.dynamictrees.models.FallingTreeEntityModelTrackerCache;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
@@ -19,7 +21,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 @OnlyIn(Dist.CLIENT)
 public class FallingTreeRenderer extends EntityRenderer<FallingTreeEntity> {
 
-    protected FallingTreeRenderer(EntityRenderDispatcher renderManager) {
+    protected FallingTreeRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager);
     }
 
@@ -36,7 +38,7 @@ public class FallingTreeRenderer extends EntityRenderer<FallingTreeEntity> {
             return;
         }
 
-        this.entityRenderDispatcher.textureManager.bind(this.getTextureLocation(entity));
+        RenderSystem.setShaderTexture(0, this.getTextureLocation(entity));
 
         final FallingTreeEntityModel treeModel = FallingTreeEntityModelTrackerCache.getOrCreateModel(entity);
 
@@ -66,10 +68,10 @@ public class FallingTreeRenderer extends EntityRenderer<FallingTreeEntity> {
 //		matrixStack.pop();
 //	}
 
-    public static class Factory implements IRenderFactory<FallingTreeEntity> {
+    public static class Factory implements EntityRendererProvider<FallingTreeEntity> {
 
         @Override
-        public EntityRenderer<FallingTreeEntity> createRenderFor(EntityRenderDispatcher manager) {
+        public EntityRenderer<FallingTreeEntity> create(EntityRendererProvider.Context manager) {
             return new FallingTreeRenderer(manager);
         }
 

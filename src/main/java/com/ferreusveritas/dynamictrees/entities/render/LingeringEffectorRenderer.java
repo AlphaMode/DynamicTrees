@@ -2,18 +2,17 @@ package com.ferreusveritas.dynamictrees.entities.render;
 
 import com.ferreusveritas.dynamictrees.entities.LingeringEffectorEntity;
 import net.minecraft.client.renderer.culling.Frustum;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 /**
  * @author Harley O'Connor
  */
 public class LingeringEffectorRenderer extends EntityRenderer<LingeringEffectorEntity> {
 
-    public LingeringEffectorRenderer(EntityRenderDispatcher renderManager) {
+    public LingeringEffectorRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager);
     }
 
@@ -27,10 +26,10 @@ public class LingeringEffectorRenderer extends EntityRenderer<LingeringEffectorE
         return MissingTextureAtlasSprite.getLocation();
     }
 
-    public static class Factory implements IRenderFactory<LingeringEffectorEntity> {
+    public static class Factory implements EntityRendererProvider<LingeringEffectorEntity> {
 
         @Override
-        public EntityRenderer<LingeringEffectorEntity> createRenderFor(EntityRenderDispatcher manager) {
+        public EntityRenderer<LingeringEffectorEntity> create(EntityRendererProvider.Context manager) {
             return new LingeringEffectorRenderer(manager);
         }
 

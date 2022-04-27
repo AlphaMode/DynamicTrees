@@ -39,8 +39,9 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.model.data.EmptyModelData;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 
@@ -106,7 +107,7 @@ public class DTClient {
             LogManager.getLogger().warn("Could not get color of " + face + " side for " + state.getBlock() + "! Branch needs to be handled manually!");
             return 0;
         }
-        final ResourceLocation resLoc = quads.get(0).func_187508_a().getName(); // Now we get the texture location of that selected face.
+        final ResourceLocation resLoc = quads.get(0).getSprite().getName(); // Now we get the texture location of that selected face.
         if (!resLoc.toString().isEmpty()) {
             final TextureUtils.PixelBuffer pixelBuffer = new TextureUtils.PixelBuffer(textureGetter.apply(resLoc));
             final int u = pixelBuffer.w / 16;
@@ -193,9 +194,10 @@ public class DTClient {
         //        MinecraftForge.EVENT_BUS.register(TextureGenerationHandler.class);
     }
 
-    private static void registerEntityRenderers() {
-        RenderingRegistry.registerEntityRenderingHandler(DTRegistries.FALLING_TREE, new FallingTreeRenderer.Factory());
-        RenderingRegistry.registerEntityRenderingHandler(DTRegistries.LINGERING_EFFECTOR, new LingeringEffectorRenderer.Factory());
+    @SubscribeEvent
+    private static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(DTRegistries.FALLING_TREE, new FallingTreeRenderer.Factory());
+        event.registerEntityRenderer(DTRegistries.LINGERING_EFFECTOR, new LingeringEffectorRenderer.Factory());
     }
 
     private static int getFoliageColor(LeavesProperties leavesProperties, Level world, BlockState blockState, BlockPos pos) {
