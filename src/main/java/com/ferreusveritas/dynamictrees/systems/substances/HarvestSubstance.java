@@ -12,14 +12,13 @@ import com.ferreusveritas.dynamictrees.systems.genfeatures.context.PostGrowConte
 import com.ferreusveritas.dynamictrees.systems.nodemappers.FindEndsNode;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.google.common.collect.Sets;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
-
 import java.util.Set;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 /**
  * @author Harley O'Connor
@@ -49,7 +48,7 @@ public class HarvestSubstance implements SubstanceEffect {
     }
 
     @Override
-    public boolean apply(World world, BlockPos rootPos) {
+    public boolean apply(Level world, BlockPos rootPos) {
         final BlockState rootState = world.getBlockState(rootPos);
         final RootyBlock rootyBlock = TreeHelper.getRooty(rootState);
 
@@ -70,7 +69,7 @@ public class HarvestSubstance implements SubstanceEffect {
         return true;
     }
 
-    private void recalculateFruitPositions(final IWorld world, final BlockPos rootPos, final RootyBlock rootyBlock) {
+    private void recalculateFruitPositions(final LevelAccessor world, final BlockPos rootPos, final RootyBlock rootyBlock) {
         this.fruitPositions.clear();
 
         final FindEndsNode findEndsNode = new FindEndsNode();
@@ -89,7 +88,7 @@ public class HarvestSubstance implements SubstanceEffect {
     }
 
     @Override
-    public boolean update(World world, BlockPos rootPos, int deltaTicks, int fertility) {
+    public boolean update(Level world, BlockPos rootPos, int deltaTicks, int fertility) {
         if (deltaTicks > this.duration) {
             return false;
         }

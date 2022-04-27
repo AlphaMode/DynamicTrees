@@ -1,28 +1,27 @@
 package com.ferreusveritas.dynamictrees.worldgen;
 
 import com.ferreusveritas.dynamictrees.api.worldgen.RadiusCoordinator;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SharedSeedRandom;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.PerlinNoiseGenerator;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.function.Function;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
+import net.minecraft.world.level.levelgen.synth.PerlinSimplexNoise;
 
 public class BiomeRadiusCoordinator implements RadiusCoordinator {
 
-    public PerlinNoiseGenerator noiseGenerator;
+    public PerlinSimplexNoise noiseGenerator;
     protected final TreeGenerator treeGenerator;
-    protected final IWorld world;
+    protected final LevelAccessor world;
     protected final ResourceLocation dimRegName;
     protected int pass;
     protected Function<Integer, Integer> chunkMultipass;
 
-    public BiomeRadiusCoordinator(TreeGenerator treeGenerator, ResourceLocation dimRegName, IWorld world) {
-        this.noiseGenerator = new PerlinNoiseGenerator(new SharedSeedRandom(96), new ArrayList<>(Collections.singletonList(1)));
+    public BiomeRadiusCoordinator(TreeGenerator treeGenerator, ResourceLocation dimRegName, LevelAccessor world) {
+        this.noiseGenerator = new PerlinSimplexNoise(new WorldgenRandom(96), new ArrayList<>(Collections.singletonList(1)));
         this.world = world;
         this.dimRegName = dimRegName;
         this.treeGenerator = treeGenerator;
@@ -49,7 +48,7 @@ public class BiomeRadiusCoordinator implements RadiusCoordinator {
         int shakelow = (kindaRandom & 0x3) % 3; // Produces 0,0,1 or 2
         int shakehigh = (kindaRandom & 0xc) % 3; // Produces 0,0,1 or 2
 
-        return MathHelper.clamp((int) size, 2 + shakelow, 8 - shakehigh); // Clamp to tree volume radius range
+        return Mth.clamp((int) size, 2 + shakelow, 8 - shakehigh); // Clamp to tree volume radius range
     }
 
     @Override

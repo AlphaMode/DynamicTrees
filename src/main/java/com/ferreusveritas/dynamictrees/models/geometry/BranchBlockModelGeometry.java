@@ -6,10 +6,15 @@ import com.ferreusveritas.dynamictrees.models.bakedmodels.ThickBranchBlockBakedM
 import com.ferreusveritas.dynamictrees.models.loaders.BranchBlockModelLoader;
 import com.ferreusveritas.dynamictrees.trees.Family;
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.client.renderer.model.*;
-import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.ModelBakery;
+import net.minecraft.client.resources.model.ModelState;
+import net.minecraft.client.resources.model.UnbakedModel;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.IModelConfiguration;
@@ -68,7 +73,7 @@ public class BranchBlockModelGeometry implements IModelGeometry<BranchBlockModel
     }
 
     @Override
-    public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function<RenderMaterial, TextureAtlasSprite> spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation) {
+    public BakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelTransform, ItemOverrides overrides, ResourceLocation modelLocation) {
         if (!this.useThickModel(this.setFamily(modelLocation))) {
             return new BasicBranchBlockBakedModel(modelLocation, this.barkResLoc, this.ringsResLoc);
         } else {
@@ -96,14 +101,14 @@ public class BranchBlockModelGeometry implements IModelGeometry<BranchBlockModel
 
     @SuppressWarnings("deprecation")
     @Override
-    public Collection<RenderMaterial> getTextures(IModelConfiguration owner, Function<ResourceLocation, IUnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) {
+    public Collection<Material> getTextures(IModelConfiguration owner, Function<ResourceLocation, UnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors) {
         if (this.thickRingsResLoc == null && this.useThickModel(this.setFamily(new ResourceLocation(owner.getModelName())))) {
             this.thickRingsResLoc = ThickRingTextureManager.addRingTextureLocation(this.ringsResLoc);
             this.addTextures(this.thickRingsResLoc);
         }
 
         return this.textures.stream()
-                .map(resourceLocation -> new RenderMaterial(AtlasTexture.LOCATION_BLOCKS, resourceLocation))
+                .map(resourceLocation -> new Material(InventoryMenu.BLOCK_ATLAS, resourceLocation))
                 .collect(Collectors.toList());
     }
 

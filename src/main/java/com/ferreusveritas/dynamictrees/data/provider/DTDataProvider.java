@@ -1,8 +1,8 @@
 package com.ferreusveritas.dynamictrees.data.provider;
 
-import net.minecraft.util.ResourceLocation;
-
 import static com.ferreusveritas.dynamictrees.util.ResourceLocationUtils.prefix;
+
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * @author Harley O'Connor

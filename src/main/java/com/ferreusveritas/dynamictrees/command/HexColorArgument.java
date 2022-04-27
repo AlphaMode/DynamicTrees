@@ -7,16 +7,15 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
-import net.minecraft.command.ISuggestionProvider;
-import net.minecraft.util.text.TranslationTextComponent;
-
 import java.awt.*;
 import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
+import net.minecraft.commands.SharedSuggestionProvider;
+import net.minecraft.network.chat.TranslatableComponent;
 
 public final class HexColorArgument implements ArgumentType<Integer> {
 
-    public static final DynamicCommandExceptionType COLOR_INVALID = new DynamicCommandExceptionType(colourString -> new TranslationTextComponent("argument.color.invalid", colourString));
+    public static final DynamicCommandExceptionType COLOR_INVALID = new DynamicCommandExceptionType(colourString -> new TranslatableComponent("argument.color.invalid", colourString));
 
     public static HexColorArgument hex() {
         return new HexColorArgument();
@@ -42,7 +41,7 @@ public final class HexColorArgument implements ArgumentType<Integer> {
 
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
-        return ISuggestionProvider.suggest(Collections.singletonList("00FFFF"), builder);
+        return SharedSuggestionProvider.suggest(Collections.singletonList("00FFFF"), builder);
     }
 
 }

@@ -1,12 +1,11 @@
 package com.ferreusveritas.dynamictrees.api.registry;
 
-import net.minecraft.util.ResourceLocation;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * An implementation for {@link AbstractRegistry} using a {@link ConcurrentHashMap} to store its entries.

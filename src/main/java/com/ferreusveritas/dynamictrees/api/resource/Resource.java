@@ -1,8 +1,7 @@
 package com.ferreusveritas.dynamictrees.api.resource;
 
-import net.minecraft.util.ResourceLocation;
-
 import java.util.function.Function;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * Container for a resource object that is keyed by its location.

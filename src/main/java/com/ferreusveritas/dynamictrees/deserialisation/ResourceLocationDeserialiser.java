@@ -2,10 +2,10 @@ package com.ferreusveritas.dynamictrees.deserialisation;
 
 import com.ferreusveritas.dynamictrees.deserialisation.result.Result;
 import com.google.gson.JsonElement;
-import net.minecraft.util.ResourceLocation;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Locale;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * An {@link JsonDeserialiser} for {@link ResourceLocation}s, but if no namespace is defined it defaults to the

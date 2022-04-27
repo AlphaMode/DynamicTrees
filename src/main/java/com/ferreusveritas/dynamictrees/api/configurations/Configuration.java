@@ -2,11 +2,10 @@ package com.ferreusveritas.dynamictrees.api.configurations;
 
 import com.ferreusveritas.dynamictrees.api.registry.RegistryEntry;
 import com.ferreusveritas.dynamictrees.util.Null;
-import net.minecraft.crash.CrashReport;
-import net.minecraft.crash.ReportedException;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import net.minecraft.CrashReport;
+import net.minecraft.ReportedException;
 import java.util.Optional;
 import java.util.function.Predicate;
 

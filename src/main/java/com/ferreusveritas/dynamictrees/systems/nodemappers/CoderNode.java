@@ -3,12 +3,11 @@ package com.ferreusveritas.dynamictrees.systems.nodemappers;
 import com.ferreusveritas.dynamictrees.api.network.NodeInspector;
 import com.ferreusveritas.dynamictrees.systems.BranchConnectables;
 import com.ferreusveritas.dynamictrees.worldgen.JoCode;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
-
 import java.util.ArrayList;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class CoderNode implements NodeInspector {
 
@@ -30,7 +29,7 @@ public class CoderNode implements NodeInspector {
     }
 
     @Override
-    public boolean run(BlockState blockState, IWorld world, BlockPos pos, Direction fromDir) {
+    public boolean run(BlockState blockState, LevelAccessor world, BlockPos pos, Direction fromDir) {
         //Branch connectables should not be mapped
         if (BranchConnectables.isBlockConnectable(world.getBlockState(pos).getBlock())) {
             return false;
@@ -58,7 +57,7 @@ public class CoderNode implements NodeInspector {
     }
 
     @Override
-    public boolean returnRun(BlockState blockState, IWorld world, BlockPos pos, Direction fromDir) {
+    public boolean returnRun(BlockState blockState, LevelAccessor world, BlockPos pos, Direction fromDir) {
         return false;
     }
 

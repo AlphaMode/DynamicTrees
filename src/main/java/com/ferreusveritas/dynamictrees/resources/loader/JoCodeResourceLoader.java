@@ -6,15 +6,15 @@ import com.ferreusveritas.dynamictrees.api.resource.loading.AbstractResourceLoad
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.worldgen.JoCode;
 import com.ferreusveritas.dynamictrees.worldgen.JoCodeRegistry;
-import net.minecraft.resources.IResourceManager;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 
 /**
  * Loads {@link JoCode} objects to the {@link JoCodeRegistry}.
@@ -30,7 +30,7 @@ public final class JoCodeResourceLoader extends AbstractResourceLoader<List<Stri
     }
 
     @Override
-    public void applyOnReload(ResourceAccessor<List<String>> resourceAccessor, IResourceManager resourceManager) {
+    public void applyOnReload(ResourceAccessor<List<String>> resourceAccessor, ResourceManager resourceManager) {
         JoCodeRegistry.clear();
         resourceAccessor.getAllResources().forEach(resource ->
                 this.registerCodes(resource.getLocation(), resource.getResource())

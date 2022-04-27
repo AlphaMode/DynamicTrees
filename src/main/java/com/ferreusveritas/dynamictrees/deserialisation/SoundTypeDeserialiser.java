@@ -2,12 +2,11 @@ package com.ferreusveritas.dynamictrees.deserialisation;
 
 import com.ferreusveritas.dynamictrees.deserialisation.result.Result;
 import com.google.gson.JsonElement;
-import net.minecraft.block.SoundType;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Util;
-
 import java.util.HashMap;
 import java.util.Map;
+import net.minecraft.Util;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.SoundType;
 
 /**
  * @author Harley O'Connor
@@ -41,7 +40,7 @@ public final class SoundTypeDeserialiser implements JsonDeserialiser<SoundType> 
                 soundTypes.put(new ResourceLocation("vine"), SoundType.VINE);
                 soundTypes.put(new ResourceLocation("nether_wart"), SoundType.NETHER_WART);
                 soundTypes.put(new ResourceLocation("lantern"), SoundType.LANTERN);
-                soundTypes.put(new ResourceLocation("stem"), SoundType.STEM);
+                soundTypes.put(new ResourceLocation("stem"), SoundType.HARD_CROP);
                 soundTypes.put(new ResourceLocation("nylium"), SoundType.NYLIUM);
                 soundTypes.put(new ResourceLocation("fungus"), SoundType.FUNGUS);
                 soundTypes.put(new ResourceLocation("roots"), SoundType.ROOTS);

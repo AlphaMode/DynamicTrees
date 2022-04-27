@@ -2,18 +2,18 @@ package com.ferreusveritas.dynamictrees.data;
 
 import com.ferreusveritas.dynamictrees.init.DTRegistries;
 import com.ferreusveritas.dynamictrees.trees.Species;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.item.crafting.ShapelessRecipe;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.ShapelessRecipe;
 
 /**
  * Handles programmatic recipes. These should be done sparingly and only for dynamic recipes - one-off recipes should be
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  */
 public final class DTRecipes {
 
-    public static void registerDirtBucketRecipes(final Map<ResourceLocation, IRecipe<?>> craftingRecipes) {
+    public static void registerDirtBucketRecipes(final Map<ResourceLocation, Recipe<?>> craftingRecipes) {
         for (final Species species : Species.REGISTRY.getAll()) {
             // If the species doesn't have a seed it doesn't need any recipes.
             if (!species.hasSeed()) {

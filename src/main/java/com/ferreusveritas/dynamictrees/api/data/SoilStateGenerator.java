@@ -3,9 +3,8 @@ package com.ferreusveritas.dynamictrees.api.data;
 import com.ferreusveritas.dynamictrees.blocks.rootyblocks.RootyBlock;
 import com.ferreusveritas.dynamictrees.blocks.rootyblocks.SoilProperties;
 import com.ferreusveritas.dynamictrees.data.provider.DTBlockStateProvider;
-import net.minecraft.block.Block;
-
 import java.util.Objects;
+import net.minecraft.world.level.block.Block;
 
 /**
  * @author Harley O'Connor

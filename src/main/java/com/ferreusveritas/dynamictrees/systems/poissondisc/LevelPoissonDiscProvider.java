@@ -5,13 +5,12 @@ import com.ferreusveritas.dynamictrees.api.worldgen.PoissonDiscProvider;
 import com.ferreusveritas.dynamictrees.api.worldgen.RadiusCoordinator;
 import com.ferreusveritas.dynamictrees.util.CoordUtils;
 import com.ferreusveritas.dynamictrees.util.RandomXOR;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3i;
-
 import java.util.*;
 import java.util.Map.Entry;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.ChunkPos;
 
 /**
  * Manages and creates all the Poisson discs in a single level (world).
@@ -76,7 +75,7 @@ public class LevelPoissonDiscProvider implements PoissonDiscProvider {
         // Step 1. Collect already solved discs from surrounding chunks.
         this.getChunkPoissonDiscs(allDiscs, chunkX, chunkZ);
         for (CoordUtils.Surround surr : CoordUtils.Surround.values()) {
-            final Vector3i dir = surr.getOffset();
+            final Vec3i dir = surr.getOffset();
             this.getChunkPoissonDiscs(allDiscs, chunkX + dir.getX(), chunkZ + dir.getZ());
         }
 
@@ -137,8 +136,8 @@ public class LevelPoissonDiscProvider implements PoissonDiscProvider {
                 // Step 7. Use the master disc and it's free arc angle to find the radius of the new tangential disc.
                 final float angle = CCW ? (float) master.getFreeAngleCCW() : (float) master.getFreeAngleCW();
                 //System.out.println("dir: " + (CCW ? "CCW" : "CW") + ", angle: " + (angle * 180 / Math.PI));
-                final double dx = master.x + (MathHelper.sin(angle) * master.radius * 1.5);
-                final double dz = master.z + (MathHelper.cos(angle) * master.radius * 1.5);
+                final double dx = master.x + (Mth.sin(angle) * master.radius * 1.5);
+                final double dz = master.z + (Mth.cos(angle) * master.radius * 1.5);
                 radius = this.radiusCoordinator.getRadiusAtCoords((int) dx, (int) dz);
                 this.debug.getRadius(master, radius, unsolvedDiscs, allDiscs);
 

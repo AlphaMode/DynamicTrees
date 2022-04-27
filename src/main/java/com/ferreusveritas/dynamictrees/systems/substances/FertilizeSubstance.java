@@ -3,11 +3,10 @@ package com.ferreusveritas.dynamictrees.systems.substances;
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.api.substances.SubstanceEffect;
 import com.ferreusveritas.dynamictrees.blocks.rootyblocks.RootyBlock;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-
 import java.util.function.Supplier;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.level.Level;
 
 public class FertilizeSubstance implements SubstanceEffect {
 
@@ -17,7 +16,7 @@ public class FertilizeSubstance implements SubstanceEffect {
     private Supplier<Integer> pulses = () -> 1;
 
     @Override
-    public boolean apply(World world, BlockPos rootPos) {
+    public boolean apply(Level world, BlockPos rootPos) {
         final RootyBlock dirt = TreeHelper.getRooty(world.getBlockState(rootPos));
 
         if (dirt != null && dirt.fertilize(world, rootPos, this.amount) || this.grow) {

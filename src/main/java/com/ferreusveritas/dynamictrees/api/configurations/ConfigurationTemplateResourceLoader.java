@@ -9,11 +9,11 @@ import com.ferreusveritas.dynamictrees.deserialisation.result.JsonResult;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.minecraft.resources.IResourceManager;
 import org.apache.logging.log4j.LogManager;
 
 import java.util.Collections;
 import java.util.List;
+import net.minecraft.server.packs.resources.ResourceManager;
 
 /**
  * @author Harley O'Connor
@@ -32,7 +32,7 @@ public class ConfigurationTemplateResourceLoader<C extends Configuration<C, E>, 
     }
 
     @Override
-    public void applyOnReload(ResourceAccessor<JsonElement> resourceAccessor, IResourceManager resourceManager) {
+    public void applyOnReload(ResourceAccessor<JsonElement> resourceAccessor, ResourceManager resourceManager) {
         resourceAccessor.forEach(resource -> {
             try {
                 this.register(resource.map(JsonElement::getAsJsonObject));

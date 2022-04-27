@@ -7,14 +7,13 @@ import com.ferreusveritas.dynamictrees.systems.genfeatures.context.PostGeneratio
 import com.ferreusveritas.dynamictrees.systems.genfeatures.context.PostGrowContext;
 import com.ferreusveritas.dynamictrees.util.CoordUtils;
 import com.ferreusveritas.dynamictrees.util.function.TetraFunction;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
-
 import javax.annotation.Nullable;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -63,7 +62,7 @@ public class ShroomlightGenFeature extends GenFeature {
                 && context.fertility() != 0 && this.placeShroomlightsInValidPlace(configuration, context.world(), context.pos(), false);
     }
 
-    private boolean placeShroomlightsInValidPlace(GenFeatureConfiguration configuration, IWorld world, BlockPos rootPos, boolean worldGen) {
+    private boolean placeShroomlightsInValidPlace(GenFeatureConfiguration configuration, LevelAccessor world, BlockPos rootPos, boolean worldGen) {
         int treeHeight = getTreeHeight(world, rootPos, configuration.get(MAX_HEIGHT));
         Block shroomlightBlock = configuration.get(SHROOMLIGHT_BLOCK);
 
@@ -92,7 +91,7 @@ public class ShroomlightGenFeature extends GenFeature {
         return false;
     }
 
-    private int getTreeHeight(IWorld world, BlockPos rootPos, int maxHeight) {
+    private int getTreeHeight(LevelAccessor world, BlockPos rootPos, int maxHeight) {
         for (int i = 1; i < maxHeight; i++) {
             if (!TreeHelper.isBranch(world.getBlockState(rootPos.above(i)))) {
                 return i - 1;
@@ -103,7 +102,7 @@ public class ShroomlightGenFeature extends GenFeature {
 
     //Like the BeeNestGenFeature, the valid places are empty blocks under branches next to the trunk.
     @Nullable
-    private List<BlockPos> findBranchPits(GenFeatureConfiguration configuration, IWorld world, BlockPos rootPos, int maxHeight) {
+    private List<BlockPos> findBranchPits(GenFeatureConfiguration configuration, LevelAccessor world, BlockPos rootPos, int maxHeight) {
         int existingBlocks = 0;
         List<BlockPos> validSpaces = new LinkedList<>();
         for (int y = 2; y < maxHeight; y++) {

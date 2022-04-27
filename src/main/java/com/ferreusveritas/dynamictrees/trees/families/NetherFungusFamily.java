@@ -5,16 +5,15 @@ import com.ferreusveritas.dynamictrees.data.DTBlockTags;
 import com.ferreusveritas.dynamictrees.data.DTItemTags;
 import com.ferreusveritas.dynamictrees.trees.Family;
 import com.ferreusveritas.dynamictrees.util.BlockBounds;
-import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-
 import java.util.Collections;
 import java.util.List;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.Material;
 
 /**
  * @author Harley O'Connor
@@ -44,7 +43,7 @@ public class NetherFungusFamily extends Family {
 
     @Override
     public SoundType getDefaultBranchSoundType() {
-        return SoundType.STEM;
+        return SoundType.HARD_CROP;
     }
 
     @Override
@@ -57,17 +56,17 @@ public class NetherFungusFamily extends Family {
     }
 
     @Override
-    public List<ITag.INamedTag<Block>> defaultBranchTags() {
+    public List<Tag.Named<Block>> defaultBranchTags() {
         return Collections.singletonList(DTBlockTags.FUNGUS_BRANCHES);
     }
 
     @Override
-    public List<ITag.INamedTag<Item>> defaultBranchItemTags() {
+    public List<Tag.Named<Item>> defaultBranchItemTags() {
         return Collections.singletonList(DTItemTags.FUNGUS_BRANCHES);
     }
 
     @Override
-    public List<ITag.INamedTag<Block>> defaultStrippedBranchTags() {
+    public List<Tag.Named<Block>> defaultStrippedBranchTags() {
         return Collections.singletonList(DTBlockTags.STRIPPED_FUNGUS_BRANCHES);
     }
 

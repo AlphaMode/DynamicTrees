@@ -3,10 +3,9 @@ package com.ferreusveritas.dynamictrees.systems.dropcreators;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.context.DropContext;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import net.minecraft.util.ResourceLocation;
-
 import java.util.List;
 import java.util.Map;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * @author Harley O'Connor

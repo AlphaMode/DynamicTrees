@@ -1,7 +1,5 @@
 package com.ferreusveritas.dynamictrees.api.resource;
 
-import net.minecraft.util.ResourceLocation;
-
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -9,6 +7,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * @author Harley O'Connor

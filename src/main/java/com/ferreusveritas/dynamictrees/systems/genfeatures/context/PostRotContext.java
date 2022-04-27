@@ -1,13 +1,13 @@
 package com.ferreusveritas.dynamictrees.systems.genfeatures.context;
 
 import com.ferreusveritas.dynamictrees.trees.Species;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelAccessor;
 
 /**
  * @author Harley O'Connor
  */
-public class PostRotContext extends GenerationContext<IWorld> {
+public class PostRotContext extends GenerationContext<LevelAccessor> {
 
     private final int radius;
     private final int neighbourCount;
@@ -17,7 +17,7 @@ public class PostRotContext extends GenerationContext<IWorld> {
     /**
      * Instantiates a {@link PostRotContext} object.
      *
-     * @param world          The {@link IWorld} object.
+     * @param world          The {@link LevelAccessor} object.
      * @param pos            The {@link BlockPos} of the branch that rot.
      * @param species        The {@link Species} of the tree that rotted.
      * @param radius         The radius of the rotted branch.
@@ -26,7 +26,7 @@ public class PostRotContext extends GenerationContext<IWorld> {
      * @param rapid          {@code true} if this rot is happening during generation as opposed to natural tree
      *                       updates.
      */
-    public PostRotContext(IWorld world, BlockPos pos, Species species, int radius, int neighbourCount, int fertility, boolean rapid) {
+    public PostRotContext(LevelAccessor world, BlockPos pos, Species species, int radius, int neighbourCount, int fertility, boolean rapid) {
         super(world, pos, species);
         this.radius = radius;
         this.neighbourCount = neighbourCount;

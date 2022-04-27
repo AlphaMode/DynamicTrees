@@ -1,9 +1,8 @@
 package com.ferreusveritas.dynamictrees.api.data;
 
 import com.ferreusveritas.dynamictrees.data.provider.DTDataProvider;
-import net.minecraft.data.IDataProvider;
-
 import javax.annotation.Nullable;
+import net.minecraft.data.DataProvider;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -11,13 +10,13 @@ import java.util.Optional;
 
 /**
  * A generator for a resource, providing the means to construct a Json file using provided {@link Dependencies} and
- * using a provided {@link IDataProvider}.
+ * using a provided {@link DataProvider}.
  *
  * @param <P> the type of the data provider to use
  * @param <I> the type of the input to get the dependencies from
  * @author Harley O'Connor
  */
-public interface Generator<P extends IDataProvider & DTDataProvider, I> {
+public interface Generator<P extends DataProvider & DTDataProvider, I> {
 
     /**
      * Gathers dependencies from the specified {@code input}, then generating the relevant files if dependencies and
@@ -36,7 +35,7 @@ public interface Generator<P extends IDataProvider & DTDataProvider, I> {
     }
 
     /**
-     * Handles generating the relevant files. External invokers should prefer using {@link #generate(IDataProvider,
+     * Handles generating the relevant files. External invokers should prefer using {@link #generate(DataProvider,
      * Object)} to this method since it gathers dependencies automatically.
      *
      * @param provider the provider to use to generate

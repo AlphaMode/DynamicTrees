@@ -2,13 +2,13 @@ package com.ferreusveritas.dynamictrees.systems.genfeatures.context;
 
 import com.ferreusveritas.dynamictrees.blocks.rootyblocks.RootyBlock;
 import com.ferreusveritas.dynamictrees.trees.Species;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 /**
  * @author Harley O'Connor
  */
-public class PostGrowContext extends GenerationContext<World> {
+public class PostGrowContext extends GenerationContext<Level> {
 
     private final BlockPos treePos;
     private final int fertility;
@@ -17,7 +17,7 @@ public class PostGrowContext extends GenerationContext<World> {
     /**
      * Instantiates a new {@link PostGrowContext} object.
      *
-     * @param world     The {@link World} object.
+     * @param world     The {@link Level} object.
      * @param rootPos   The {@link BlockPos} of the {@link RootyBlock} the generated tree is planted on.
      * @param treePos   The {@link BlockPos} of the base trunk block of the tree (usually directly above the rooty dirt
      *                  block).
@@ -27,7 +27,7 @@ public class PostGrowContext extends GenerationContext<World> {
      *                  otherwise this member is being used to grow a tree with a growth accelerant like bonemeal or the
      *                  potion of burgeoning.
      */
-    public PostGrowContext(World world, BlockPos rootPos, Species species, BlockPos treePos, int fertility, boolean natural) {
+    public PostGrowContext(Level world, BlockPos rootPos, Species species, BlockPos treePos, int fertility, boolean natural) {
         super(world, rootPos, species);
         this.treePos = treePos;
         this.fertility = fertility;

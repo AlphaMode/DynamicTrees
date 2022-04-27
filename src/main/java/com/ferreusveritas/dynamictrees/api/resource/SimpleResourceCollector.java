@@ -1,9 +1,8 @@
 package com.ferreusveritas.dynamictrees.api.resource;
 
-import net.minecraft.util.ResourceLocation;
-
 import java.util.Map;
 import java.util.function.Supplier;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * @author Harley O'Connor

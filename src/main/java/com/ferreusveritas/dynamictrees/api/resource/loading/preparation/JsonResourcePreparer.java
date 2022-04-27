@@ -7,12 +7,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-import net.minecraft.resources.IResource;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -35,13 +33,13 @@ public final class JsonResourcePreparer extends AbstractResourcePreparer<JsonEle
     }
 
     @Override
-    protected void readAndPutResource(IResource resource, ResourceLocation resourceName) throws PreparationException {
+    protected void readAndPutResource(net.minecraft.server.packs.resources.Resource resource, ResourceLocation resourceName) throws PreparationException {
         final JsonElement jsonElement = readResource(resource);
         this.resourceCollector.put(new Resource<>(resourceName, jsonElement));
     }
 
     @Nonnull
-    static JsonElement readResource(IResource resource) throws PreparationException {
+    static JsonElement readResource(net.minecraft.server.packs.resources.Resource resource) throws PreparationException {
         final Reader reader = getReader(resource);
         final JsonElement json = tryParseJson(reader);
 
@@ -51,14 +49,14 @@ public final class JsonResourcePreparer extends AbstractResourcePreparer<JsonEle
         return json;
     }
 
-    private static BufferedReader getReader(IResource resource) {
+    private static BufferedReader getReader(net.minecraft.server.packs.resources.Resource resource) {
         return new BufferedReader(new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8));
     }
 
     @Nullable
     private static JsonElement tryParseJson(Reader reader) throws PreparationException {
         try {
-            return JSONUtils.fromJson(JsonHelper.getGson(), reader, JsonElement.class);
+            return GsonHelper.fromJson(JsonHelper.getGson(), reader, JsonElement.class);
         } catch (JsonParseException e) {
             throw new PreparationException(e);
         }
